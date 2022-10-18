@@ -14,6 +14,10 @@ repositories {
 
 dependencies {
     testImplementation(kotlin("test"))
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.2")
+    testImplementation("org.jetbrains.kotlin:kotlin-test-junit5:1.6.20")
+    testImplementation("org.hamcrest:hamcrest:2.2")
+    testImplementation("io.rest-assured:kotlin-extensions:5.0.1")
 }
 
 tasks.test {
