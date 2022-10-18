@@ -18,6 +18,7 @@ dependencies {
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5:1.6.20")
     testImplementation("org.hamcrest:hamcrest:2.2")
     testImplementation("io.rest-assured:kotlin-extensions:5.0.1")
+    testImplementation(kotlin("script-runtime"))
 }
 
 tasks.test {

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="SampleTEst$SampleTEst" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-10-18T14:16:17" hostname="C11-KW9SA2ZGDKB" time="1.26">
+  <properties/>
+  <testcase name="test()" classname="SampleTEst$SampleTEst" time="1.26"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
