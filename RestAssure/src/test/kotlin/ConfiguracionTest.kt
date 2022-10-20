@@ -9,11 +9,22 @@ import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.TestInstance
 
+import io.restassured.parsing.Parser
+import io.restassured.response.Response
+
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 open class ConfiguracionTest {
 
     companion object {
         lateinit var requestSpecification: RequestSpecification
+    }
+
+    //PARSEAR JSON
+    object RestTest {
+        fun doGetRequest(endpoint: String?): Response {
+            RestAssured.defaultParser = Parser.JSON
+            return RestAssured.given().headers("Content-Type", ContentType.JSON, "Accept", ContentType.JSON).`when`()[endpoint].then().contentType(ContentType.JSON).extract().response()
+        }
     }
 
     @BeforeAll
@@ -30,6 +41,7 @@ open class ConfiguracionTest {
             .setConfig(config)
             .build()
     }
+
 
     @AfterAll
     fun tearDown(){

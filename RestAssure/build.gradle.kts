@@ -19,6 +19,7 @@ dependencies {
     testImplementation("org.hamcrest:hamcrest:2.2")
     testImplementation("io.rest-assured:kotlin-extensions:5.0.1")
     testImplementation(kotlin("script-runtime"))
+    implementation ("com.google.code.gson:gson:2.8.5")
 }
 
 tasks.test {
