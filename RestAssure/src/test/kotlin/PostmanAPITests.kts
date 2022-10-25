@@ -1,4 +1,3 @@
-
 import io.restassured.module.kotlin.extensions.Given
 import io.restassured.module.kotlin.extensions.Then
 import io.restassured.module.kotlin.extensions.When
@@ -13,14 +12,14 @@ import org.apache.http.HttpStatus
 class SampleTEst : ConfiguracionTest() {
 
     @Test
-    /*Este es un test de prueba en el que simplemente comprobamos que el primer usuario del JSON
-    (el que tiene el id 1), se llama Leanne Graham.✔️
-    */
+            /*Este es un test de prueba en el que simplemente comprobamos que el primer usuario del JSON
+            (el que tiene el id 1), se llama Leanne Graham.✔️
+            */
     fun test() {
         Given {
             port(3000)
         } When {
-            get("/users/{id}",1)
+            get("/users/{id}", 1)
         } Then {
             statusCode(200)
             body("name", equalTo("Leanne Graham"))
@@ -28,10 +27,7 @@ class SampleTEst : ConfiguracionTest() {
     }
 
     @Test
-    /*EJERCICIO Realizar una consulta al endpoint /posts y ver los resultados.
-     El resultado que nos tiene que mostrar es un total de 100 ids.✔️
-    */
-    fun `Consulta al endpoint posts`() {
+    fun `given posts when get request triggered then status code 200 and 100 results obtained`() {
         Given {
             port(3000)
         } When {
@@ -48,10 +44,7 @@ class SampleTEst : ConfiguracionTest() {
     }
 
     @Test
-    /*EJERCICIO Realizar una consulta al endpoint /comments y ver los resultados.
-    El resultado que nos tiene que mostrar es un total de 500 ids.✔️
-    */
-    fun `Consulta al endpoint comments`() {
+    fun `given comments when get request triggered then status code 200 and 500 results obtained`() {
         Given {
             port(3000)
         } When {
@@ -67,16 +60,13 @@ class SampleTEst : ConfiguracionTest() {
         }
     }
 
-    /*EJERCICIO Realizar una consulta al endpoint comments con una paginacion de 3 y
-    5 elementos como límite por página✔️
-    */
     @Test
-    fun `paginacion de 3 y 5 elementos en endpoint comments`(){
+    fun `given comments when get request triggered then status code 200 and a pagination of 3 and 5 elements obtained`() {
         Given {
             port(3000)
-        }When {
+        } When {
             get("/comments")
-        }Then {
+        } Then {
             statusCode(200)
             val response = RestTest.doGetRequest("http://localhost:3000/comments?_page=3&_limit=5")
             val jsonResponse = response.jsonPath().getList<String>("$")
@@ -86,16 +76,12 @@ class SampleTEst : ConfiguracionTest() {
     }
 
     @Test
-    /*
-    EJERCICIO consulta al endpoint /posts donde ordenes por el campo "id" de manera ascendente y
-    filtrando por el texto "alias". El resultado tiene que ser 9 registros.✔️
-     */
-    fun `consulta al endpoint posts ordenando por id y filtrando por alias`(){
+    fun `given posts when get request triggered then status code 200 and sorting by id and filtering by aliases obtained`() {
         Given {
             port(3000)
-        }When {
+        } When {
             get("/posts")
-        }Then {
+        } Then {
             statusCode(200)
             val response = RestTest.doGetRequest("http://localhost:3000/posts?_sort=id&_order=asc&q=alias")
             val jsonResponse = response.jsonPath().getList<String>("$")
@@ -104,24 +90,21 @@ class SampleTEst : ConfiguracionTest() {
     }
 
 
-
     @Test
-    /*
-    EJERCICIO consulta al endpoint /posts para crear un nuevo registro. Comprobar que el resultado sea correcto.
-     */
-    fun `consulta endpoint posts creando nuevo registro`(){
-        val datos = Datos(10,101,"Yago", "Hello World")
+    fun `given posts when get request triggered then status code 201 and a new post is created`() {
+        val datos = Datos(10, 101, "Yago", "Hello World")
         val requestBody = Json.encodeToString(datos)
-        println(datos.userId)
+        println(requestBody)
         Given {
             port(3000)
             body(requestBody)
-        }When {
-            post("/posts/100")
-        }Then {
+        } When {
+            post("/posts")
+        } Then {
+            println(requestBody)
             statusCode(HttpStatus.SC_CREATED)
             body(
-                "userId", equalTo(requestBody),
+                "userId", equalTo(datos.userId),
                 "title", equalTo(datos.title),
                 "body", equalTo(datos.body)
             )
@@ -129,22 +112,19 @@ class SampleTEst : ConfiguracionTest() {
     }
 
     @Test
-    /*
-    Consulta el registro creado y actualiza alguno de sus campos.
-    Comprueba que el/los campo/s actualizado/s previamente se han modificado correctamente.
-    */
-    fun `consulta endpoint posts modificando un registro `(){
-        val datos = Datos(10,101,"Yago", "Hello World")
+    fun `given posts when get request triggered then status code 200 and a post is modified`() {
+        val datos = Datos(10, 101, "Yago", "Hello World")
         val requestBody = Json.encodeToString(datos)
+        println(requestBody)
         Given {
             port(3000)
             body(requestBody)
-        }When {
+        } When {
             patch("/posts/99")
-        }Then {
+        } Then {
             statusCode(200)
             body(
-                "userId", equalTo(requestBody),
+                "userId", equalTo(datos.userId),
                 "title", equalTo(datos.title),
                 "body", equalTo(datos.body)
             )
@@ -152,15 +132,12 @@ class SampleTEst : ConfiguracionTest() {
     }
 
     @Test
-    /*
-    Elimina el registro creado. Comprueba que el registro se ha eliminado correctamente. ✔️
-    */
-    fun `consulta el endpoint posts y eliminar un registro creado`(){
+    fun `check the endpoint posts delete a record created then get status code 200`() {
         Given {
             port(3000)
-        }When {
+        } When {
             delete("/posts/102")
-        }Then {
+        } Then {
             statusCode(200)
         }
     }

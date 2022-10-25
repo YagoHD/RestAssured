@@ -23,19 +23,20 @@ open class ConfiguracionTest {
     object RestTest {
         fun doGetRequest(endpoint: String?): Response {
             RestAssured.defaultParser = Parser.JSON
-            return RestAssured.given().headers("Content-Type", ContentType.JSON, "Accept", ContentType.JSON).`when`()[endpoint].then().contentType(ContentType.JSON).extract().response()
+            return RestAssured.given().headers("Content-Type", ContentType.JSON, "Accept", ContentType.JSON)
+                .`when`()[endpoint].then().contentType(ContentType.JSON).extract().response()
         }
     }
 
     @BeforeAll
-    fun setup(){
+    fun setup() {
         val logConfig = LogConfig.logConfig()
             .enableLoggingOfRequestAndResponseIfValidationFails(LogDetail.ALL)
         val config = RestAssuredConfig.config().logConfig(logConfig)
 
         requestSpecification = RequestSpecBuilder()
             .setBaseUri("http://localhost:3000")
-            .setBasePath("/users")
+            .setBasePath("/posts")
             .setContentType(ContentType.JSON)
             .setRelaxedHTTPSValidation()
             .setConfig(config)
@@ -44,7 +45,7 @@ open class ConfiguracionTest {
 
 
     @AfterAll
-    fun tearDown(){
+    fun tearDown() {
         RestAssured.reset()
     }
 }
