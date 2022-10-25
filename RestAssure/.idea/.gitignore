@@ -4,4 +4,4 @@
 build/*
 !build/build.xml
 !build.gradle.kts
-RestAssure/build/*
+RestAssure/*

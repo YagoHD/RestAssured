@@ -92,7 +92,7 @@ class SampleTEst : ConfiguracionTest() {
 
     @Test
     fun `given posts when get request triggered then status code 201 and a new post is created`() {
-        val datos = Datos(10, 101, "Yago", "Hello World")
+        val datos = PostsBodyRequest(10, 101, "Yago", "Hello World")
         val requestBody = Json.encodeToString(datos)
         println(requestBody)
         Given {
@@ -113,7 +113,7 @@ class SampleTEst : ConfiguracionTest() {
 
     @Test
     fun `given posts when get request triggered then status code 200 and a post is modified`() {
-        val datos = Datos(10, 101, "Yago", "Hello World")
+        val datos = PostsBodyRequest(10, 101, "Yago", "Hello World")
         val requestBody = Json.encodeToString(datos)
         println(requestBody)
         Given {
