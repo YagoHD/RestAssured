@@ -9,7 +9,7 @@ import kotlinx.serialization.json.Json
 import org.apache.http.HttpStatus
 
 
-class SampleTEst : ConfiguracionTest() {
+class PostBodyRequest : ConfiguracionTest() {
 
     @Test
             /*Este es un test de prueba en el que simplemente comprobamos que el primer usuario del JSON
@@ -17,11 +17,11 @@ class SampleTEst : ConfiguracionTest() {
             */
     fun test() {
         Given {
-            port(3000)
+            spec(requestSpecification)
         } When {
             get("/users/{id}", 1)
         } Then {
-            statusCode(200)
+            statusCode(HttpStatus.SC_OK)
             body("name", equalTo("Leanne Graham"))
         }
     }
@@ -29,12 +29,12 @@ class SampleTEst : ConfiguracionTest() {
     @Test
     fun `given posts when get request triggered then status code 200 and 100 results obtained`() {
         Given {
-            port(3000)
+            spec(requestSpecification)
         } When {
             get("/posts")
 
         } Then {
-            statusCode(200)
+            statusCode(HttpStatus.SC_OK)
             val response = RestTest.doGetRequest("http://localhost:3000/posts")
             val jsonResponse = response.jsonPath().getList<String>("$")
             println(jsonResponse.size)
@@ -46,12 +46,12 @@ class SampleTEst : ConfiguracionTest() {
     @Test
     fun `given comments when get request triggered then status code 200 and 500 results obtained`() {
         Given {
-            port(3000)
+            spec(requestSpecification)
         } When {
             get("/comments")
 
         } Then {
-            statusCode(200)
+            statusCode(HttpStatus.SC_OK)
             val response = RestTest.doGetRequest("http://localhost:3000/comments")
             val jsonResponse = response.jsonPath().getList<String>("$")
             println(jsonResponse.size)
@@ -63,11 +63,11 @@ class SampleTEst : ConfiguracionTest() {
     @Test
     fun `given comments when get request triggered then status code 200 and a pagination of 3 and 5 elements obtained`() {
         Given {
-            port(3000)
+            spec(requestSpecification)
         } When {
             get("/comments")
         } Then {
-            statusCode(200)
+            statusCode(HttpStatus.SC_OK)
             val response = RestTest.doGetRequest("http://localhost:3000/comments?_page=3&_limit=5")
             val jsonResponse = response.jsonPath().getList<String>("$")
             println(jsonResponse.size)
@@ -78,11 +78,11 @@ class SampleTEst : ConfiguracionTest() {
     @Test
     fun `given posts when get request triggered then status code 200 and sorting by id and filtering by aliases obtained`() {
         Given {
-            port(3000)
+            spec(requestSpecification)
         } When {
             get("/posts")
         } Then {
-            statusCode(200)
+            statusCode(HttpStatus.SC_OK)
             val response = RestTest.doGetRequest("http://localhost:3000/posts?_sort=id&_order=asc&q=alias")
             val jsonResponse = response.jsonPath().getList<String>("$")
             println(jsonResponse.size)
@@ -96,7 +96,7 @@ class SampleTEst : ConfiguracionTest() {
         val requestBody = Json.encodeToString(datos)
         println(requestBody)
         Given {
-            port(3000)
+            spec(requestSpecification)
             body(requestBody)
         } When {
             post("/posts")
@@ -113,16 +113,16 @@ class SampleTEst : ConfiguracionTest() {
 
     @Test
     fun `given posts when get request triggered then status code 200 and a post is modified`() {
-        val datos = PostsBodyRequest(10, 101, "Yago", "Hello World")
+        val datos = PostsBodyRequest(10, 100, "YagoModificado", "Hello World Modificado")
         val requestBody = Json.encodeToString(datos)
         println(requestBody)
         Given {
-            port(3000)
+            spec(requestSpecification)
             body(requestBody)
         } When {
             patch("/posts/99")
         } Then {
-            statusCode(200)
+            statusCode(HttpStatus.SC_OK)
             body(
                 "userId", equalTo(datos.userId),
                 "title", equalTo(datos.title),
@@ -134,11 +134,11 @@ class SampleTEst : ConfiguracionTest() {
     @Test
     fun `check the endpoint posts delete a record created then get status code 200`() {
         Given {
-            port(3000)
+            spec(requestSpecification)
         } When {
-            delete("/posts/102")
+            delete("/posts/101")
         } Then {
-            statusCode(200)
+            statusCode(HttpStatus.SC_OK)
         }
     }
 }

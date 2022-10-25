@@ -36,7 +36,7 @@ open class ConfiguracionTest {
 
         requestSpecification = RequestSpecBuilder()
             .setBaseUri("http://localhost:3000")
-            .setBasePath("/posts")
+            .setBasePath("")
             .setContentType(ContentType.JSON)
             .setRelaxedHTTPSValidation()
             .setConfig(config)

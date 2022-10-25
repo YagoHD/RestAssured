@@ -1,7 +1,5 @@
 # Default ignored files
 /shelf/
 /workspace.xml
-build/*
-!build/build.xml
 !build.gradle.kts
 RestAssure/*
