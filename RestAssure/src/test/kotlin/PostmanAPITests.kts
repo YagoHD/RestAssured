@@ -4,12 +4,10 @@ import io.restassured.module.kotlin.extensions.When
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import org.apache.http.HttpStatus
-import org.hamcrest.MatcherAssert
 import org.hamcrest.MatcherAssert.assertThat
-import org.hamcrest.Matchers
 import org.hamcrest.Matchers.*
 import org.junit.jupiter.api.Test
-
+import kotlin.test.assertContains
 
 
 class PostBodyRequest : ConfiguracionTest() {
@@ -26,7 +24,6 @@ class PostBodyRequest : ConfiguracionTest() {
         } Then {
             statusCode(HttpStatus.SC_OK)
             body("name", equalTo("Leanne Graham"))
-
         }
     }
 
@@ -75,6 +72,7 @@ class PostBodyRequest : ConfiguracionTest() {
             val jsonResponse = response.jsonPath().getList<String>("$")
             println(jsonResponse.size)
             println(jsonResponse)
+
         }
     }
 
@@ -88,7 +86,16 @@ class PostBodyRequest : ConfiguracionTest() {
             statusCode(HttpStatus.SC_OK)
             val response = RestTest.doGetRequest("http://localhost:3000/posts?_sort=id&_order=asc&q=alias")
             val jsonResponse = response.jsonPath().getList<String>("$")
-            println(jsonResponse.size)
+
+            //val titulos = response.jsonPath().getString("title")
+            //val bodys = response.jsonPath().getString("body")
+            //assertThat(titulos , containsString("alias"))
+            //assertThat(bodys, containsString("alias"))
+
+            for (num in 0..jsonResponse.size) {
+                assertThat(jsonResponse[num], containsString("alias"))
+                println(num)
+            }
         }
     }
 
