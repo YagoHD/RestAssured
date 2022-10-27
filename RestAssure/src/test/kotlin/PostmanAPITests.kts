@@ -1,12 +1,15 @@
 import io.restassured.module.kotlin.extensions.Given
 import io.restassured.module.kotlin.extensions.Then
 import io.restassured.module.kotlin.extensions.When
-import org.hamcrest.Matchers.equalTo
-import org.junit.jupiter.api.Test
-
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import org.apache.http.HttpStatus
+import org.hamcrest.MatcherAssert
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.Matchers
+import org.hamcrest.Matchers.*
+import org.junit.jupiter.api.Test
+
 
 
 class PostBodyRequest : ConfiguracionTest() {
@@ -23,6 +26,7 @@ class PostBodyRequest : ConfiguracionTest() {
         } Then {
             statusCode(HttpStatus.SC_OK)
             body("name", equalTo("Leanne Graham"))
+
         }
     }
 
@@ -37,10 +41,10 @@ class PostBodyRequest : ConfiguracionTest() {
             statusCode(HttpStatus.SC_OK)
             val response = RestTest.doGetRequest("http://localhost:3000/posts")
             val jsonResponse = response.jsonPath().getList<String>("$")
-            println(jsonResponse.size)
-            val ids = response.jsonPath().getString("id")
-            println(ids)
+
+            assertThat(jsonResponse.size, equalTo(100))
         }
+
     }
 
     @Test
@@ -53,10 +57,9 @@ class PostBodyRequest : ConfiguracionTest() {
         } Then {
             statusCode(HttpStatus.SC_OK)
             val response = RestTest.doGetRequest("http://localhost:3000/comments")
-            val jsonResponse = response.jsonPath().getList<String>("$")
-            println(jsonResponse.size)
             val ids = response.jsonPath().getString("id")
-            println(ids)
+
+            assertThat(ids,  containsString("500"))
         }
     }
 
