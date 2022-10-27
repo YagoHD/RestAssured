@@ -7,7 +7,6 @@ import org.apache.http.HttpStatus
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.*
 import org.junit.jupiter.api.Test
-import kotlin.test.assertContains
 
 
 class PostBodyRequest : ConfiguracionTest() {
@@ -31,6 +30,7 @@ class PostBodyRequest : ConfiguracionTest() {
     fun `given posts when get request triggered then status code 200 and 100 results obtained`() {
         Given {
             spec(requestSpecification)
+
         } When {
             get("/posts")
 
@@ -86,16 +86,14 @@ class PostBodyRequest : ConfiguracionTest() {
             statusCode(HttpStatus.SC_OK)
             val response = RestTest.doGetRequest("http://localhost:3000/posts?_sort=id&_order=asc&q=alias")
             val jsonResponse = response.jsonPath().getList<String>("$")
+            val Something: String = jsonResponse.toString()
+            print(Something)
 
-            //val titulos = response.jsonPath().getString("title")
-            //val bodys = response.jsonPath().getString("body")
-            //assertThat(titulos , containsString("alias"))
-            //assertThat(bodys, containsString("alias"))
-
-            for (num in 0..jsonResponse.size) {
-                assertThat(jsonResponse[num], containsString("alias"))
-                println(num)
-            }
+            var titulos = response.jsonPath().getString("title")
+            println(titulos)
+            var bodys = response.jsonPath().getString("body")
+            assertThat(titulos , containsString("alias"))
+            assertThat(bodys, containsString("alias"))
         }
     }
 
@@ -111,7 +109,6 @@ class PostBodyRequest : ConfiguracionTest() {
         } When {
             post("/posts")
         } Then {
-            println(requestBody)
             statusCode(HttpStatus.SC_CREATED)
             body(
                 "userId", equalTo(datos.userId),
