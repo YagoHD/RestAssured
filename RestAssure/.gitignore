@@ -3,4 +3,6 @@
 /.idea/workspace.xml
 !build.gradle.kts
 /build
-RestAssure/Build/
+/*/build
+/*/.idea/*
+.gradle
