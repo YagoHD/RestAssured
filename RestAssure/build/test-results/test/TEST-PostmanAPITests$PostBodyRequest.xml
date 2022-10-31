@@ -1,8 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="PostmanAPITests$PostBodyRequest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-10-28T11:15:31" hostname="AMAQVQ52M2Y41" time="2.734">
+<testsuite name="PostmanAPITests$PostBodyRequest" tests="8" skipped="0" failures="0" errors="0" timestamp="2022-10-31T13:35:24" hostname="AMAQVQ52M2Y41" time="4.028">
   <properties/>
-  <testcase name="given posts when get request triggered then status code 200 and sorting by id and filtering by aliases obtained()" classname="PostmanAPITests$PostBodyRequest" time="2.734"/>
-  <system-out><![CDATA[[{userId=1, id=5, title=nesciunt quas odio, body=repudiandae veniam quaerat sunt sed
+  <testcase name="test()" classname="PostmanAPITests$PostBodyRequest" time="2.435"/>
+  <testcase name="given comments when get request triggered then status code 200 and a pagination of 3 and 5 elements obtained()" classname="PostmanAPITests$PostBodyRequest" time="0.444"/>
+  <testcase name="given posts when get request triggered then status code 200 and sorting by id and filtering by aliases obtained()" classname="PostmanAPITests$PostBodyRequest" time="0.243"/>
+  <testcase name="given posts when get request triggered then status code 200 and 100 results obtained()" classname="PostmanAPITests$PostBodyRequest" time="0.132"/>
+  <testcase name="given comments when get request triggered then status code 200 and 500 results obtained()" classname="PostmanAPITests$PostBodyRequest" time="0.27"/>
+  <testcase name="given posts when get request triggered then status code 200 and a post is modified()" classname="PostmanAPITests$PostBodyRequest" time="0.225"/>
+  <testcase name="given posts when get request triggered then status code 201 and a new post is created()" classname="PostmanAPITests$PostBodyRequest" time="0.147"/>
+  <testcase name="check the endpoint posts delete a record created then get status code 200()" classname="PostmanAPITests$PostBodyRequest" time="0.114"/>
+  <system-out><![CDATA[5
+[{postId=3, id=11, name=fugit labore quia mollitia quas deserunt nostrum sunt, email=Veronica_Goodwin@timmothy.net, body=ut dolorum nostrum id quia aut est
+fuga est inventore vel eligendi explicabo quis consectetur
+aut occaecati repellat id natus quo est
+ut blanditiis quia ut vel ut maiores ea}, {postId=3, id=12, name=modi ut eos dolores illum nam dolor, email=Oswald.Vandervort@leanne.org, body=expedita maiores dignissimos facilis
+ipsum est rem est fugit velit sequi
+eum odio dolores dolor totam
+occaecati ratione eius rem velit}, {postId=3, id=13, name=aut inventore non pariatur sit vitae voluptatem sapiente, email=Kariane@jadyn.tv, body=fuga eos qui dolor rerum
+inventore corporis exercitationem
+corporis cupiditate et deserunt recusandae est sed quis culpa
+eum maiores corporis et}, {postId=3, id=14, name=et officiis id praesentium hic aut ipsa dolorem repudiandae, email=Nathan@solon.io, body=vel quae voluptas qui exercitationem
+voluptatibus unde sed
+minima et qui ipsam aspernatur
+expedita magnam laudantium et et quaerat ut qui dolorum}, {postId=3, id=15, name=debitis magnam hic odit aut ullam nostrum tenetur, email=Maynard.Hodkiewicz@roberta.com, body=nihil ut voluptates blanditiis autem odio dicta rerum
+quisquam saepe et est
+sunt quasi nemo laudantium deserunt
+molestias tempora quo quia}]
+[{userId=1, id=5, title=nesciunt quas odio, body=repudiandae veniam quaerat sunt sed
 alias aut fugiat sit autem sed est
 voluptatem omnis possimus esse voluptatibus quis
 est aut tenetur dolor neque}, {userId=2, id=16, title=sint suscipit perspiciatis velit dolorum rerum ipsa laboriosam odio, body=suscipit nam nisi quo aperiam aut
@@ -27,6 +51,8 @@ quo molestiae omnis ea eveniet optio}, {userId=9, id=83, title=odit et voluptate
 voluptate sapiente consequatur est qui
 necessitatibus autem aut ipsa aperiam modi dolore numquam
 reprehenderit eius rem quibusdam}][nesciunt quas odio, sint suscipit perspiciatis velit dolorum rerum ipsa laboriosam odio, rem alias distinctio quo quis, a quo magni similique perferendis, fuga nam accusamus voluptas reiciendis itaque, ut quo aut ducimus alias, beatae enim quia vel, odit et voluptates doloribus alias odio et]
+{"userId":10,"id":100,"title":"YagoModificado","body":"Hello World Modificado"}
+{"userId":10,"id":101,"title":"Yago","body":"Hello World"}
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
