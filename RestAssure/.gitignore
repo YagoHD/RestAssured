@@ -2,4 +2,5 @@
 /shelf/
 /.idea/workspace.xml
 !build.gradle.kts
-RestAssure/*
+/build
+RestAssure/Build/
