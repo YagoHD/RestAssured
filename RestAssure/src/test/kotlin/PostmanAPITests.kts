@@ -54,9 +54,9 @@ class PostBodyRequest : ConfiguracionTest() {
         } Then {
             statusCode(HttpStatus.SC_OK)
             val response = RestTest.doGetRequest("http://localhost:3000/comments")
-            val ids = response.jsonPath().getString("id")
+            val jsonResponse = response.jsonPath().getList<String>("$")
 
-            assertThat(ids,  containsString("500"))
+            assertThat(jsonResponse.size, equalTo(500))
         }
     }
 
@@ -70,9 +70,18 @@ class PostBodyRequest : ConfiguracionTest() {
             statusCode(HttpStatus.SC_OK)
             val response = RestTest.doGetRequest("http://localhost:3000/comments?_page=3&_limit=5")
             val jsonResponse = response.jsonPath().getList<String>("$")
-            println(jsonResponse.size)
+            val postIds = response.jsonPath().getList<String>("postId")
             println(jsonResponse)
 
+            //val pagina = postIds.joinToString("-")
+            //assertThat(postIds, equalTo("3-3-3-3-3"))
+
+            assertThat(postIds[0], equalTo(3))
+            assertThat(postIds[1], equalTo(3))
+            assertThat(postIds[2], equalTo(3))
+            assertThat(postIds[3], equalTo(3))
+            assertThat(postIds[4], equalTo(3))
+            assertThat(postIds.size, equalTo(5))
         }
     }
 
@@ -83,16 +92,17 @@ class PostBodyRequest : ConfiguracionTest() {
         } When {
             get("/posts")
         } Then {
-            statusCode(HttpStatus.SC_OK)
             val response = RestTest.doGetRequest("http://localhost:3000/posts?_sort=id&_order=asc&q=alias")
             val jsonResponse = response.jsonPath().getList<String>("$")
-            val Something: String = jsonResponse.toString()
-            print(Something)
+            val body: String = jsonResponse.toString()
+            print(body)
 
-            var titulos = response.jsonPath().getString("title")
+            val titulos = response.jsonPath().getString("title")
             println(titulos)
-            var bodys = response.jsonPath().getString("body")
-            assertThat(titulos , containsString("alias"))
+            val bodys = response.jsonPath().getString("body")
+
+            statusCode(HttpStatus.SC_OK)
+            assertThat(titulos, containsString("alias"))
             assertThat(bodys, containsString("alias"))
         }
     }
