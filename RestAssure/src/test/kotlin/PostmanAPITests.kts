@@ -26,6 +26,10 @@ class PostBodyRequest : ConfiguracionTest() {
         }
     }
 
+
+
+
+
     @Test
     fun `given posts when get request triggered then status code 200 and 100 results obtained`() {
         Given {
@@ -73,14 +77,9 @@ class PostBodyRequest : ConfiguracionTest() {
             val postIds = response.jsonPath().getList<String>("postId")
             println(jsonResponse)
 
-            //val pagina = postIds.joinToString("-")
-            //assertThat(postIds, equalTo("3-3-3-3-3"))
-
-            assertThat(postIds[0], equalTo(3))
-            assertThat(postIds[1], equalTo(3))
-            assertThat(postIds[2], equalTo(3))
-            assertThat(postIds[3], equalTo(3))
-            assertThat(postIds[4], equalTo(3))
+            for (i in 0..4){
+                assertThat(postIds[i], equalTo(3))
+            }
             assertThat(postIds.size, equalTo(5))
         }
     }
