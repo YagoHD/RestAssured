@@ -92,12 +92,8 @@ class PostBodyRequest : ConfiguracionTest() {
             get("/posts")
         } Then {
             val response = RestTest.doGetRequest("http://localhost:3000/posts?_sort=id&_order=asc&q=alias")
-            val jsonResponse = response.jsonPath().getList<String>("$")
-            val body: String = jsonResponse.toString()
-            print(body)
 
             val titulos = response.jsonPath().getString("title")
-            println(titulos)
             val bodys = response.jsonPath().getString("body")
 
             statusCode(HttpStatus.SC_OK)
